@@ -3,6 +3,7 @@ services:
     image: redislabs/redismod
     ports:
       - '6379:6379'
+    command: --requirepass bipmpass
   web:
     build: .
     stop_signal: SIGINT
@@ -12,3 +13,6 @@ services:
       - ./app:/app
     depends_on:
       - redis
+    environment:
+      - REDIS_PASSWORD=bipmpass
+      - REDIS_HOST=${REDIS_HOST}
