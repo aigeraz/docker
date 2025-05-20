@@ -9,11 +9,12 @@ load_dotenv()
 
 # Setup Redis connection
 cache = redis.Redis(
-    host=os.getenv("REDIS_HOST", "localhost"),
+    host=os.getenv("REDIS_HOST", "srv-captain--redis"),  # default to correct service name
     port=int(os.getenv("REDIS_PORT", 6379)),
     password=os.getenv("REDIS_PASSWORD"),
-    decode_responses=True  # Optional: makes Redis return strings not bytes
+    decode_responses=True
 )
+
 
 app = Flask(__name__)
 
@@ -23,8 +24,8 @@ def get_hit_count():
         try:
             return cache.incr('hits')
         except redis.exceptions.ConnectionError as exc:
-            retries -= 1
-            print(f"Redis connection failed, retries left: {retries}")
+            retries -= 1  # decrement retries!
+            print(f"Redis connection failed: {type(exc).__name__} - {exc}. Retries left: {retries}")
             time.sleep(0.5)
     raise ConnectionError("Could not connect to Redis after multiple retries.")
 
