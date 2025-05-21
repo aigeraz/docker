@@ -5,7 +5,8 @@ import os
 from dotenv import load_dotenv
 
 load_dotenv() 
-cache = redis.Redis(host=os.getenv('REDIS_HOST'), port=6379,  password=os.getenv('REDIS_PASSWORD'))
+# cache = redis.Redis(host=os.getenv('REDIS_HOST'), port=6379,  password=os.getenv('REDIS_PASSWORD'))
+cache = redis.Redis(host="srv-captain--redis", port=6379, db=0, password='MyBIPMPassword')
 app = Flask(__name__)
 
 def get_hit_count():
