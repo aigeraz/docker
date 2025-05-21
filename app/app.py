@@ -7,11 +7,11 @@ from dotenv import load_dotenv
 # Load environment variables from .env file
 load_dotenv()
 
-# Setup Redis connection
+# print("REDIS_HOST:", os.getenv("REDIS_HOST"))
 cache = redis.Redis(
-    host=os.getenv("REDIS_HOST", "srv-captain--redis"),  # default to correct service name
-    port=int(os.getenv("REDIS_PORT", 6379)),
-    password=os.getenv("REDIS_PASSWORD"),
+    host='srv-captain--redis',
+    port=6379,
+    password='MyBIPMPassword',
     decode_responses=True
 )
 

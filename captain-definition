@@ -1,6 +1,4 @@
 {
-    "schemaVersion": 2,
-    "dockerfilePath": null,
-    "imageName": "redis:7"
-  }
-  
+  "schemaVersion": 2,
+  "dockerfilePath": "./Dockerfile"
+}
